@@ -15,4 +15,12 @@ class Collectors0Test {
                 .collect(Collectors0.findFirst());
         assertEquals(Optional.of("foo"), actual);
     }
+
+    @Test
+    void findFirstNull() {
+        final String firstElement = null;
+        final Stream<String> stream = Stream.of(firstElement);
+        assertThrows(NullPointerException.class,
+                () -> stream.collect(Collectors0.findFirst()));
+    }
 }
