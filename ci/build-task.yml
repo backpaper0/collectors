@@ -1,0 +1,22 @@
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: openjdk, tag: 8}
+
+inputs:
+  - name: collectors
+
+caches:
+  - path: m2
+
+run:
+  path: sh
+  args:
+    - -c
+    - |-
+      rm -fr ~/.m2
+      ln -s `pwd`/m2 ~/.m2
+      cd collectors
+      chmod +x mvnw
+      ./mvnw package
