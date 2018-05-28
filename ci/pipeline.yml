@@ -1,0 +1,15 @@
+resources:
+- name: collectors
+  type: git
+  source:
+    uri: git@github.com:backpaper0/collectors.git
+    branch: develop
+    private_key: ((github-private-key))
+
+jobs:
+- name: build
+  plan:
+  - get: collectors
+    trigger: true
+  - task: mvnw package
+    file: collectors/ci/build-task.yml
